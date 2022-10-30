@@ -75,6 +75,7 @@ int main(int argc, char *argv[])
 
     char *command = (char *)calloc(sizeof(char), 2000);
     char *commandToPop = (char *)calloc(sizeof(char), 2000);
+    char *commandToCheckIf = (char *)calloc(sizeof(char), 2000);
     char *fileName;
     char *fileToWrite;
     /*char *commandToCheck;*/
@@ -84,21 +85,25 @@ int main(int argc, char *argv[])
         getUserName(); //<username> >>> 
         /*scanf*/ fgets(command, 2000, stdin);
         deleteAtTheEnd(command);
+        //char * firstStrigOnTheCommand = strtok(command, " ");
         strcpy(commandToPop, command);
+        strcpy(commandToCheckIf, command);
+        char * firstCommand = strtok(commandToCheckIf, " ");
+        /*printf("%s\n", commandToPop);*/
 
-        if (strcmp(command, "listdir") == 0)
+        if (strcmp(firstCommand, "listdir") == 0)
         {
             system("ls"); //help of built in commands.
         }
-        else if (strcmp(command, "mycomputername") == 0)
+        else if (strcmp(firstCommand, "mycomputername") == 0)
         {
             system("hostname"); //help of built in commands.
         }
-        else if (strcmp(command, "whatsmyip") == 0)
+        else if (strcmp(firstCommand, "whatsmyip") == 0)
         {
             getIPAdress();
         }
-        else if (command[0] == 'p') // whether printfile (fileName) or printfile (fileName) > (newFileName)
+        else if (strcmp(firstCommand, "printfile") == 0) // whether printfile (fileName) or printfile (fileName) > (newFileName)
         {
             /* printf("%s\n", command);S
             fileName = (char *)calloc(sizeof(char), 2000);*/
@@ -181,13 +186,13 @@ int main(int argc, char *argv[])
                 /*printf("%s\n", commmandToCat);*/
                 system(commmandToCat); //help of built in commands.
             }
-        } else if(strcmp(command, "hellotext") == 0) {
+        } else if(strcmp(firstCommand, "hellotext") == 0) {
 
             /*system("$EDITOR");*/ // open default $EDITOR variable, which is vim in may machine
             /*system("gtk-launch $(xdg-mime query default text/plain)");*/ // to launch default gui text editor. it works on ubuntu but id do not sure it can run all linux-based systems.
             system("gedit");
 
-        } else if (command[0] == 'd') {
+        } else if (strcmp(firstCommand, "dididothat") == 0){ // means dididothat command is entered.
 
             /*char *token = strtok(command, " ");
             token = strtok(NULL, " ");
@@ -231,7 +236,7 @@ int main(int argc, char *argv[])
     free(command);
     free(fileName);
     free(fileToWrite);
-    /*free(commandToCheck);*/
+    free(commandToCheckIf);
     free(commandToPop);
     free(pt);
     return 0;
